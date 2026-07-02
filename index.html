@@ -16,7 +16,7 @@
     }
     .certificate-card {
         background-color: #ffffff;
-        width: 700px;
+        width: 700px; /* Adjust as needed, based on image_3.png ratio */
         max-width: 95%;
         border: 1px solid #e0e0e0;
         position: relative;
@@ -31,7 +31,7 @@
         transform: translateX(-50%);
         width: 70px;
         height: 70px;
-        background-color: #df9e44;
+        background-color: #df9e44; /* Orange/Brown */
         border-radius: 50%;
         border: 6px solid #f4f4f4;
         display: flex;
@@ -45,7 +45,8 @@
         fill: #ffffff;
     }
     .cert-header {
-        text-align: center;
+        text-align: right;
+        justify-content: center;
         color: #444;
         font-size: 16px;
         line-height: 1.8;
@@ -54,37 +55,39 @@
     }
     .divider {
         height: 5px;
-        background-color: #df9e44;
+        background-color: #df9e44; /* Orange/Brown */
         margin: 0 0 25px 0;
         border: none;
     }
     .cert-content {
         display: flex;
         justify-content: space-between;
-        align-items: stretch;
+        align-items: flex-start;
         gap: 30px;
+        /* reverse flex direction so text data is on the right, photo is on the left */
+        flex-direction: row-reverse;
     }
     .cert-data {
         flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 10px 0;
-    }
-    .data-row {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 12px 20px;
         color: #333;
         font-size: 15px;
-        font-weight: bold;
+        line-height: 1.6;
+        margin-left: 20px; /* give some separation from photo */
     }
     .data-label {
-        color: #666;
-        font-weight: normal;
+        font-weight: bold;
+        text-align: right;
+    }
+    .data-value {
+        text-align: right;
     }
     .cert-photo {
-        width: 140px;
+        width: 140px; /* Adjust to match image_3.png aspect ratio */
         height: 180px;
+        border: 2px solid #000;
         background-color: #000;
         display: flex;
         justify-content: center;
@@ -95,7 +98,6 @@
         max-height: 100%;
         object-fit: contain;
     }
-    
     /* ضبط التصميم للموبايل */
     @media (max-width: 600px) {
         .cert-content {
@@ -104,6 +106,7 @@
         }
         .cert-data {
             width: 100%;
+            margin-left: 0;
             gap: 15px;
         }
         .cert-photo {
@@ -138,24 +141,19 @@
     <!-- البيانات والصورة -->
     <div class="cert-content">
         <div class="cert-data">
-            <div class="data-row">
-                <span class="data-label">التخصص</span>
-                <span>فني مساحه</span>
-            </div>
-            <div class="data-row">
-                <span class="data-label">صالحة لغاية</span>
-                <span>15/08/2027</span>
-            </div>
-            <div class="data-row">
-                <span class="data-label">الجنسية</span>
-                <span>مصر</span>
-            </div>
-            <div class="data-row">
-                <span class="data-label">تاريخ الالتحاق</span>
-                <span>15/08/2017</span>
-            </div>
+            <span class="data-label">التخصص</span>
+            <span class="data-value">فني مساحه</span>
+
+            <span class="data-label">صالحة لغاية</span>
+            <span class="data-value">15/08/2027</span>
+
+            <span class="data-label">الجنسية</span>
+            <span class="data-value">مصر</span>
+
+            <span class="data-label">تاريخ الالتحاق</span>
+            <span class="data-value">15/08/2017</span>
         </div>
-        
+
         <div class="cert-photo">
             <!-- تأكد إن اسم الصورة photo.jpg مرفوع في جيت هاب -->
             <img src="photo.jpg" alt="صورة العضو">
