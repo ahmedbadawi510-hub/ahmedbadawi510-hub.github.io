@@ -1,165 +1,34 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>وثيقة الهيئة السعودية للمهندسين</title>
-<style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f7f9fc;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-    .certificate-card {
-        background-color: #ffffff;
-        width: 700px; /* Adjust as needed, based on image_3.png ratio */
-        max-width: 95%;
-        border: 1px solid #e0e0e0;
-        position: relative;
-        padding: 50px 40px 30px;
-        margin-top: 50px;
-        box-sizing: border-box;
-    }
-    .icon-container {
-        position: absolute;
-        top: -40px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 70px;
-        height: 70px;
-        background-color: #df9e44; /* Orange/Brown */
-        border-radius: 50%;
-        border: 6px solid #f4f4f4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 0 0 1px #e0e0e0;
-    }
-    .icon-container svg {
-        width: 35px;
-        height: 35px;
-        fill: #ffffff;
-    }
-    .cert-header {
-        text-align: right;
-        justify-content: center;
-        color: #444;
-        font-size: 16px;
-        line-height: 1.8;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
-    .divider {
-        height: 5px;
-        background-color: #df9e44; /* Orange/Brown */
-        margin: 0 0 25px 0;
-        border: none;
-    }
-    .cert-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 30px;
-        /* reverse flex direction so text data is on the right, photo is on the left */
-        flex-direction: row-reverse;
-    }
-    .cert-data {
-        flex: 1;
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 12px 20px;
-        color: #333;
-        font-size: 15px;
-        line-height: 1.6;
-        margin-left: 20px; /* give some separation from photo */
-    }
-    .data-label {
-        font-weight: bold;
-        text-align: right;
-    }
-    .data-value {
-        text-align: right;
-    }
-    .cert-photo {
-        width: 140px; /* Adjust to match image_3.png aspect ratio */
-        height: 180px;
-        border: 2px solid #000;
-        background-color: #000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .cert-photo img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-    }
-    /* ضبط التصميم للموبايل */
-    @media (max-width: 600px) {
-        .cert-content {
-            flex-direction: column-reverse;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وثيقة اعتماد مهني</title>
+    <style>
+        /* إزالة الهوامش وجعل الخلفية رمادي فاتح لتمييز الصورة */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
             align-items: center;
+            min-height: 100vh;
         }
-        .cert-data {
-            width: 100%;
-            margin-left: 0;
-            gap: 15px;
+
+        /* ضبط حجم الصورة عشان تتناسب مع أي شاشة (موبايل أو كمبيوتر) */
+        img {
+            max-width: 100%;
+            max-height: 100vh;
+            object-fit: contain;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف للصورة */
         }
-        .cert-photo {
-            margin-bottom: 20px;
-        }
-        .certificate-card {
-            padding: 50px 20px 20px;
-        }
-    }
-</style>
+    </style>
 </head>
 <body>
 
-<div class="certificate-card">
-    <!-- الأيقونة العلوية -->
-    <div class="icon-container">
-        <svg viewBox="0 0 24 24">
-            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-        </svg>
-    </div>
-
-    <!-- النصوص العلوية -->
-    <div class="cert-header">
-        هذه الوثيقة صادرة من الهيئة السعودية للمهندسين وقد منحت<br>
-        للعضو احمد بدوي ضوي زهران<br>
-        رقم العضوية 340425
-    </div>
-
-    <!-- الخط البرتقالي -->
-    <hr class="divider">
-
-    <!-- البيانات والصورة -->
-    <div class="cert-content">
-        <div class="cert-data">
-            <span class="data-label">التخصص</span>
-            <span class="data-value">فني مساحه</span>
-
-            <span class="data-label">صالحة لغاية</span>
-            <span class="data-value">15/08/2027</span>
-
-            <span class="data-label">الجنسية</span>
-            <span class="data-value">مصر</span>
-
-            <span class="data-label">تاريخ الالتحاق</span>
-            <span class="data-value">15/08/2017</span>
-        </div>
-
-        <div class="cert-photo">
-            <!-- تأكد إن اسم الصورة photo.jpg مرفوع في جيت هاب -->
-            <img src="photo.jpg" alt="صورة العضو">
-        </div>
-    </div>
-</div>
+    <!-- استدعاء الصورة -->
+    <img src="photo.jpg" alt="وثيقة اعتماد">
 
 </body>
 </html>
