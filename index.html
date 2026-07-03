@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وثيقة اعتماد مهني</title>
     <style>
-        /* إزالة الهوامش وجعل الخلفية رمادي فاتح لتمييز الصورة */
+        /* إعدادات الصفحة الأساسية */
         body {
             margin: 0;
             padding: 0;
@@ -14,21 +14,101 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            font-family: Tahoma, Arial, sans-serif;
         }
 
-        /* ضبط حجم الصورة عشان تتناسب مع أي شاشة (موبايل أو كمبيوتر) */
-        img {
+        /* ستايل مربع التحقق (الكابتشا) */
+        .captcha-container {
+            background-color: white;
+            border: 1px solid #d3d3d3;
+            border-radius: 4px;
+            padding: 20px 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 280px;
+            transition: opacity 0.3s ease;
+        }
+
+        /* ستايل مربع الصح */
+        .captcha-container input[type="checkbox"] {
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+        }
+
+        /* ستايل النص */
+        .captcha-text {
+            font-size: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* ستايل لوجو الكابتشا الوهمي */
+        .captcha-logo {
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+            color: #999;
+        }
+
+        .captcha-logo img {
+            width: 30px;
+            margin-bottom: 3px;
+        }
+
+        /* ستايل الصورة (مخفية في البداية) */
+        #image-container {
+            display: none; 
+        }
+
+        #image-container img {
             max-width: 100%;
             max-height: 100vh;
             object-fit: contain;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف للصورة */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
 
-    <!-- استدعاء الصورة -->
-    <img src="photo.jpg" alt="وثيقة اعتماد">
+    <!-- قسم التحقق من الروبوت -->
+    <div class="captcha-container" id="captcha-box">
+        <input type="checkbox" id="robot-check">
+        <span class="captcha-text">أنا لست برنامج روبوت</span>
+        
+        <div class="captcha-logo">
+            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+            <span>reCAPTCHA</span>
+        </div>
+    </div>
+
+    <!-- قسم الصورة -->
+    <div id="image-container">
+        <!-- اسم الصورة بتاعتك -->
+        <img src="photo.jpg" alt="وثيقة اعتماد">
+    </div>
+
+    <!-- كود التشغيل (لإخفاء الكابتشا وإظهار الصورة) -->
+    <script>
+        const checkbox = document.getElementById('robot-check');
+        const captchaBox = document.getElementById('captcha-box');
+        const imageContainer = document.getElementById('image-container');
+
+        // أول ما تدوس على مربع الصح
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                // عملنا تأخير 0.8 ثانية (800 ملي ثانية) عشان يدي إحساس التحميل الحقيقي
+                setTimeout(function() {
+                    captchaBox.style.display = 'none'; // إخفاء مربع التحقق
+                    imageContainer.style.display = 'block'; // إظهار الصورة
+                }, 800); 
+            }
+        });
+    </script>
 
 </body>
 </html>
