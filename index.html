@@ -17,6 +17,14 @@
             font-family: Tahoma, Arial, sans-serif;
         }
 
+        /* الحاوية اللي بتضم الكابتشا والزرار */
+        #verification-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* المسافة بين المربع والزرار */
+        }
+
         /* ستايل مربع التحقق (الكابتشا) */
         .captcha-container {
             background-color: white;
@@ -28,7 +36,6 @@
             align-items: center;
             gap: 15px;
             width: 280px;
-            transition: opacity 0.3s ease;
         }
 
         /* ستايل مربع الصح */
@@ -60,6 +67,31 @@
             margin-bottom: 3px;
         }
 
+        /* ستايل زرار الاستمرار */
+        #continue-btn {
+            padding: 10px 40px;
+            font-size: 16px;
+            font-family: inherit;
+            color: white;
+            background-color: #007bff; /* لون أزرق */
+            border: none;
+            border-radius: 5px;
+            cursor: not-allowed; /* شكل الماوس لما يكون الزرار مطفي */
+            opacity: 0.5; /* شفافية عشان يبان إنه مطفي */
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        /* ستايل الزرار لما يشتغل */
+        #continue-btn.active {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        #continue-btn.active:hover {
+            background-color: #0056b3; /* لون أغمق شوية لما تقف عليه بالماوس */
+        }
+
         /* ستايل الصورة (مخفية في البداية) */
         #image-container {
             display: none; 
@@ -75,15 +107,20 @@
 </head>
 <body>
 
-    <!-- قسم التحقق من الروبوت -->
-    <div class="captcha-container" id="captcha-box">
-        <input type="checkbox" id="robot-check">
-        <span class="captcha-text">أنا لست برنامج روبوت</span>
-        
-        <div class="captcha-logo">
-            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
-            <span>reCAPTCHA</span>
+    <!-- قسم التحقق والزرار -->
+    <div id="verification-section">
+        <div class="captcha-container" id="captcha-box">
+            <input type="checkbox" id="robot-check">
+            <span class="captcha-text">أنا لست برنامج روبوت</span>
+            
+            <div class="captcha-logo">
+                <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+                <span>reCAPTCHA</span>
+            </div>
         </div>
+        
+        <!-- زر الاستمرار -->
+        <button id="continue-btn" disabled>الاستمرار</button>
     </div>
 
     <!-- قسم الصورة -->
@@ -92,20 +129,31 @@
         <img src="photo.jpg" alt="وثيقة اعتماد">
     </div>
 
-    <!-- كود التشغيل (لإخفاء الكابتشا وإظهار الصورة) -->
+    <!-- كود التشغيل -->
     <script>
         const checkbox = document.getElementById('robot-check');
-        const captchaBox = document.getElementById('captcha-box');
+        const continueBtn = document.getElementById('continue-btn');
+        const verificationSection = document.getElementById('verification-section');
         const imageContainer = document.getElementById('image-container');
 
-        // أول ما تدوس على مربع الصح
+        // لما تدوس على مربع الصح
         checkbox.addEventListener('change', function() {
             if (this.checked) {
-                // عملنا تأخير 0.8 ثانية (800 ملي ثانية) عشان يدي إحساس التحميل الحقيقي
-                setTimeout(function() {
-                    captchaBox.style.display = 'none'; // إخفاء مربع التحقق
-                    imageContainer.style.display = 'block'; // إظهار الصورة
-                }, 800); 
+                // تفعيل الزرار
+                continueBtn.disabled = false;
+                continueBtn.classList.add('active');
+            } else {
+                // تعطيل الزرار لو شلت علامة الصح
+                continueBtn.disabled = true;
+                continueBtn.classList.remove('active');
+            }
+        });
+
+        // لما تدوس على زرار الاستمرار
+        continueBtn.addEventListener('click', function() {
+            if (checkbox.checked) {
+                verificationSection.style.display = 'none'; // إخفاء قسم التحقق بالكامل
+                imageContainer.style.display = 'block'; // إظهار الصورة
             }
         });
     </script>
